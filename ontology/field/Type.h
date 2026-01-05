@@ -18,6 +18,7 @@ enum Type {
 };
 
 std::string toString(const Type& type);
+Type fromStringToType(const std::string& string);
 
 
 #endif //INTELLIGENTSYSTEM_TYPE_H

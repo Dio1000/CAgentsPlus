@@ -22,6 +22,35 @@ public:
     int getYear() const;
 
     std::string toString() const;
+    bool compareTo(const Date& other) const;
+
+    bool operator==(const Date& other) const {
+        return compareTo(other);
+    }
+
+    bool operator>(const Date& other) const {
+        if (this->year > other.year) return true;
+        else if (this->month > other.month) return true;
+        return this->day > other.day;
+    }
+
+    bool operator>=(const Date& other) const {
+        if (this->year > other.year) return true;
+        else if (this->month > other.month) return true;
+        return this->day >= other.day;
+    }
+
+    bool operator<(const Date& other) const {
+        if (this->year < other.year) return true;
+        else if (this->month < other.month) return true;
+        return this->day < other.day;
+    }
+
+    bool operator<=(const Date& other) const {
+        if (this->year < other.year) return true;
+        else if (this->month < other.month) return true;
+        return this->day <= other.day;
+    }
 };
 
 

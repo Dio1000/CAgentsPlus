@@ -36,6 +36,12 @@ public:
     const Date& getDATE() const;
 
     std::string toString() const;
+
+    bool compareTo(const Value& other) const;
+    bool greaterThan(const Value& other) const;
+    bool greaterOrEqualThan(const Value& other) const;
+    bool lesserThan(const Value& other) const;
+    bool lesserOrEqualThan(const Value& other) const;
 };
 
 #endif

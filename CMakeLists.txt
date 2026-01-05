@@ -32,4 +32,10 @@ add_executable(IntelligentSystem main.cpp
         ontology/Value.h
         ontology/structures/Date.cpp
         ontology/structures/Date.h
+        ontology/factory/OntologyFactory.cpp
+        ontology/factory/OntologyFactory.h
+        helper/Algorithm.cpp
+        helper/Algorithm.h
+        ontology/query/Query.cpp
+        ontology/query/Query.h
 )

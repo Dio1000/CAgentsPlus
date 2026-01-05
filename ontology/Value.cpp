@@ -88,3 +88,38 @@ std::string Value::toString() const {
             return "NULL";
     }
 }
+
+bool Value::compareTo(const Value &other) const {
+    if (empty || other.empty) return false;
+    if (type != other.type) return false;
+
+    return data == other.data;
+}
+
+bool Value::greaterThan(const Value &other) const {
+    if (empty || other.empty) return false;
+    if (type != other.type) return false;
+
+    return data > other.data;
+}
+
+bool Value::greaterOrEqualThan(const Value& other) const {
+    if (empty || other.empty) return false;
+    if (type != other.type) return false;
+
+    return data >= other.data;
+}
+
+bool Value::lesserThan(const Value &other) const {
+    if (empty || other.empty) return false;
+    if (type != other.type) return false;
+
+    return data < other.data;
+}
+
+bool Value::lesserOrEqualThan(const Value &other) const {
+    if (empty || other.empty) return false;
+    if (type != other.type) return false;
+
+    return data <= other.data;
+}

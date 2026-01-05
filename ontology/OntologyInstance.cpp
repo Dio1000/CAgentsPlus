@@ -38,5 +38,16 @@ void OntologyInstance::setValue(const std::string& field, const Value& value) {
 
 
 const Value& OntologyInstance::getValue(const std::string& field) const {
+    if (!ontology->hasField(field)) {
+        throw std::runtime_error(
+                "Field '" + field + "' does not exist in ontology '" +
+                ontology->getName() + "'."
+        );
+    }
+
     return values.at(field);
+}
+
+bool OntologyInstance::hasField(const std::string &field) const {
+    return !ontology->hasField(field);
 }

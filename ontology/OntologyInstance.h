@@ -19,6 +19,7 @@ public:
 
     void setValue(const std::string& field, const Value& value);
     const Value& getValue(const std::string& field) const;
+    bool hasField(const std::string& field) const;
 };
 
 #endif //INTELLIGENTSYSTEM_ONTOLOGYINSTANCE_H

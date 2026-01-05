@@ -25,3 +25,7 @@ int Date::getYear() const {
 std::string Date::toString() const {
     return std::to_string(day) + "." + std::to_string(month) + "." + std::to_string(year);
 }
+
+bool Date::compareTo(const Date& other) const {
+    return (this->day == other.day && this->month == other.month && this->year == other.year);
+}

@@ -1,5 +1,0 @@
-album_id,INT,NOT_NULL
-name,TEXT,NOT_NULL
-genre,TEXT,NOT_NULL
-length,INT,NULLABLE
-rating,REAL,NULLABLE

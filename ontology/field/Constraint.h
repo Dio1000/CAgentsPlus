@@ -14,5 +14,6 @@ enum Constraint {
 };
 
 std::string toString(const Constraint& constraint);
+Constraint fromStringToConstraint(const std::string& string);
 
 #endif //INTELLIGENTSYSTEM_CONSTRAINT_H

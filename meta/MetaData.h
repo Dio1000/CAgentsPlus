@@ -13,6 +13,8 @@ public:
     static std::string ONTOLOGY_ROOT_DIRECTORY;
     static std::string ONTOLOGY_META_FILE;
     static std::string ONTOLOGY_DATA_DIRECTORY;
+
+    static std::string getMetaDataPath(const std::string& ontologyName);
 };
 
 

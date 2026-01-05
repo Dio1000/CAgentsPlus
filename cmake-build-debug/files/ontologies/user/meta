@@ -1,0 +1,4 @@
+first_name,TEXT,NOT_NULL
+last_name,TEXT,NOT_NULL
+email,TEXT,NOT_NULL
+age,INT,NOT_NULL

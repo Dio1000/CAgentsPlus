@@ -9,3 +9,7 @@ std::string MetaData::ONTOLOGY_ROOT_DIRECTORY = MetaData::FILES_ROOT_DIRECTORY +
 std::string MetaData::ONTOLOGY_META_FILE = "/meta";
 std::string MetaData::ONTOLOGY_DATA_DIRECTORY = "/data";
 
+std::string MetaData::getMetaDataPath(const std::string &ontologyName) {
+    return ONTOLOGY_ROOT_DIRECTORY + "/" + ontologyName + ONTOLOGY_META_FILE;
+}
+

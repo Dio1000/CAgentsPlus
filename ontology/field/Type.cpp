@@ -15,3 +15,14 @@ std::string toString(const Type& type) {
         case TEXT: return "TEXT";
     }
 }
+
+Type fromStringToType(const std::string& string) {
+    if (string == "DEFAULT_TYPE") return DEFAULT_TYPE;
+    else if (string == "INT") return INT;
+    else if (string == "REAL") return REAL;
+    else if (string == "BIGINT") return BIGINT;
+    else if (string == "DATE") return DATE;
+    else if (string == "BOOL") return BOOL;
+    else if (string == "TEXT") return TEXT;
+    else return DEFAULT_TYPE;
+}
