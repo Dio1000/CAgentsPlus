@@ -11,6 +11,8 @@
 #include "../../meta/MetaData.h"
 #include "../../io/InputDevice.h"
 #include "../../helper/Algorithm.h"
+#include "../structures/Date.h"
+#include "../OntologyInstance.h"
 
 class OntologyFactory {
 public:
@@ -19,6 +21,7 @@ public:
     OntologyFactory& operator=(const OntologyFactory& other) = delete;
 
     static Ontology getOntology(const std::string& ontologyName);
+    static OntologyInstance getOntologyInstance(Ontology* ontology, int index);
 };
 
 

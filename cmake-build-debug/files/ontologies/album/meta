@@ -1,0 +1,6 @@
+name,TEXT,NOT_NULL
+artist,TEXT,NOT_NULL
+genre,TEXT,NOT_NULL
+release_date,DATE,NULLABLE
+duration,INT,NULLABLE
+rating,REAL,NULLABLE

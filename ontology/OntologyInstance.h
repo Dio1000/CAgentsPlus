@@ -7,6 +7,10 @@
 
 #include "Ontology.h"
 #include "Value.h"
+#include "../io/InputDevice.h"
+#include "../io/OutputDevice.h"
+#include "../io/FileManager.h"
+#include "../helper/Logger.h"
 #include <unordered_map>
 
 class OntologyInstance {
@@ -18,8 +22,12 @@ public:
     explicit OntologyInstance(const Ontology* ontology);
 
     void setValue(const std::string& field, const Value& value);
+    void setValue(const Field& fieldName, const Value& value);
     const Value& getValue(const std::string& field) const;
     bool hasField(const std::string& field) const;
+
+    std::string toString() const;
+    void save() const;
 };
 
 #endif //INTELLIGENTSYSTEM_ONTOLOGYINSTANCE_H

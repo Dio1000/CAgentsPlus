@@ -30,3 +30,12 @@ void OutputDevice::writeLine(const std::string &path, const std::string &line) {
 void OutputDevice::writeToScreen(const std::string &line) {
     std::cout << line << '\n';
 }
+
+void OutputDevice::replaceLine(const std::string &path, const std::string &line) {
+    if (path.empty()) throw std::runtime_error("File path is empty. Cannot append line.");
+    if (!FileManager::validFile(path)) throw std::runtime_error("File path " + path + " does not exist!");
+
+    std::ofstream fout(path, std::ios::trunc);
+    fout << line << std::endl;
+    fout.close();
+}
