@@ -1,0 +1,7 @@
+rule "genre":
+IF EQUAL_TO("genre", "pop")
+THEN ADD 10
+
+rule "rating":
+IF GREATER_THAN("rating", 8)
+THEN MUL 2

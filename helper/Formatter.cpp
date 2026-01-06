@@ -31,10 +31,12 @@ void Formatter::formatMetaOntology(const Ontology &ontology) {
     std::string ontologyRootPath = ontology.getPath();
     std::string ontologyMetaPath = ontology.getPath() + MetaData::ONTOLOGY_META_FILE;
     std::string ontologyRowIDPath = ontology.getPath() + MetaData::ONTOLOGY_ROWID_FILE;
+    std::string ontologyRulesPath = ontology.getPath() + MetaData::ONTOLOGY_RULES_FILE;
     std::string ontologyDataPath = ontology.getPath() + MetaData::ONTOLOGY_DATA_DIRECTORY;
 
     FileManager::createDirectory(ontologyRootPath);
     FileManager::createFile(ontologyMetaPath);
+    FileManager::createFile(ontologyRulesPath);
     FileManager::createFile(ontologyRowIDPath);
     FileManager::createDirectory(ontologyDataPath);
 

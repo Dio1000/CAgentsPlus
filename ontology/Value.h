@@ -3,6 +3,7 @@
 
 #include <variant>
 #include <string>
+#include <iostream>
 #include "structures/Date.h"
 #include "field/Type.h"
 

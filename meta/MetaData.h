@@ -15,10 +15,12 @@ public:
     static std::string ONTOLOGY_ROOT_DIRECTORY;
     static std::string ONTOLOGY_META_FILE;
     static std::string ONTOLOGY_ROWID_FILE;
+    static std::string ONTOLOGY_RULES_FILE;
     static std::string ONTOLOGY_DATA_DIRECTORY;
 
     static std::string getMetaDataPath(const std::string& ontologyName);
     static std::string getDataPath(const std::string& ontologyName, int value);
+    static std::string getRulesPath(const std::string& ontologyName);
     static int getRowID(const std::string& ontologyName);
     static void incrementRowID(const std::string& ontologyName);
 };

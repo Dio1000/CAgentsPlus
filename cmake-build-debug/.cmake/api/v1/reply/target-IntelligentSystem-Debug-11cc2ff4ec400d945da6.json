@@ -69,7 +69,11 @@
 				33,
 				35,
 				37,
-				39
+				39,
+				41,
+				43,
+				45,
+				47
 			]
 		}
 	],
@@ -122,7 +126,11 @@
 				33,
 				35,
 				37,
-				39
+				39,
+				41,
+				43,
+				45,
+				47
 			]
 		},
 		{
@@ -148,7 +156,11 @@
 				34,
 				36,
 				38,
-				40
+				40,
+				42,
+				44,
+				46,
+				48
 			]
 		}
 	],
@@ -378,6 +390,50 @@
 		{
 			"backtrace" : 1,
 			"path" : "ontology/query/decision/Weight.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ontology/query/decision/Rule.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ontology/query/decision/Rule.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ontology/query/decision/RuleDecision.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ontology/query/decision/RuleDecision.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ontology/query/enum/QueryType.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ontology/query/enum/QueryType.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ontology/query/enum/Operation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ontology/query/enum/Operation.h",
 			"sourceGroupIndex" : 1
 		}
 	],

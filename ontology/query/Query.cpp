@@ -42,3 +42,7 @@ bool Query::lesserOrEqualThan(const std::string &field, const Value &value) cons
 
     return stored.lesserOrEqualThan(value);
 }
+
+bool Query::isEmpty() const {
+    return this->ontologyInstance == nullptr;
+}
