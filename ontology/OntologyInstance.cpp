@@ -90,7 +90,7 @@ std::string OntologyInstance::toString() const {
         else string += field.getName() + "=" + this->getValue(field.getName()).toString() + ",";
     }
 
-    return string.substr(0, string.length() - 1);
+    return string.substr(0, string.length() - 1) + "}";
 }
 
 void OntologyInstance::save() const {
@@ -111,4 +111,8 @@ void OntologyInstance::save() const {
     FileManager::createFile(jsonPath);
     OutputDevice::writeLine(jsonPath, json);
     MetaData::incrementRowID(ontology->getName());
+}
+
+Ontology *OntologyInstance::getOntology() const {
+    return const_cast<Ontology *>(this->ontology);
 }

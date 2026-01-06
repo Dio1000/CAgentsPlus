@@ -38,4 +38,10 @@ add_executable(IntelligentSystem main.cpp
         helper/Algorithm.h
         ontology/query/Query.cpp
         ontology/query/Query.h
+        ontology/query/Decision.cpp
+        ontology/query/Decision.h
+        ontology/query/decision/WeightedDecision.cpp
+        ontology/query/decision/WeightedDecision.h
+        ontology/query/decision/Weight.cpp
+        ontology/query/decision/Weight.h
 )

@@ -157,6 +157,24 @@ build CMakeFiles/IntelligentSystem.dir/ontology/query/Query.cpp.o: CXX_COMPILER_
   OBJECT_DIR = CMakeFiles/IntelligentSystem.dir
   OBJECT_FILE_DIR = CMakeFiles/IntelligentSystem.dir/ontology/query
 
+build CMakeFiles/IntelligentSystem.dir/ontology/query/Decision.cpp.o: CXX_COMPILER__IntelligentSystem_unscanned_Debug /Users/dariansandru/CLionProjects/CAgentsPlus/ontology/query/Decision.cpp || cmake_object_order_depends_target_IntelligentSystem
+  DEP_FILE = CMakeFiles/IntelligentSystem.dir/ontology/query/Decision.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -mmacosx-version-min=15.6 -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/IntelligentSystem.dir
+  OBJECT_FILE_DIR = CMakeFiles/IntelligentSystem.dir/ontology/query
+
+build CMakeFiles/IntelligentSystem.dir/ontology/query/decision/WeightedDecision.cpp.o: CXX_COMPILER__IntelligentSystem_unscanned_Debug /Users/dariansandru/CLionProjects/CAgentsPlus/ontology/query/decision/WeightedDecision.cpp || cmake_object_order_depends_target_IntelligentSystem
+  DEP_FILE = CMakeFiles/IntelligentSystem.dir/ontology/query/decision/WeightedDecision.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -mmacosx-version-min=15.6 -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/IntelligentSystem.dir
+  OBJECT_FILE_DIR = CMakeFiles/IntelligentSystem.dir/ontology/query/decision
+
+build CMakeFiles/IntelligentSystem.dir/ontology/query/decision/Weight.cpp.o: CXX_COMPILER__IntelligentSystem_unscanned_Debug /Users/dariansandru/CLionProjects/CAgentsPlus/ontology/query/decision/Weight.cpp || cmake_object_order_depends_target_IntelligentSystem
+  DEP_FILE = CMakeFiles/IntelligentSystem.dir/ontology/query/decision/Weight.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -mmacosx-version-min=15.6 -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/IntelligentSystem.dir
+  OBJECT_FILE_DIR = CMakeFiles/IntelligentSystem.dir/ontology/query/decision
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target IntelligentSystem
@@ -165,7 +183,7 @@ build CMakeFiles/IntelligentSystem.dir/ontology/query/Query.cpp.o: CXX_COMPILER_
 #############################################
 # Link the executable IntelligentSystem
 
-build IntelligentSystem: CXX_EXECUTABLE_LINKER__IntelligentSystem_Debug CMakeFiles/IntelligentSystem.dir/main.cpp.o CMakeFiles/IntelligentSystem.dir/io/InputDevice.cpp.o CMakeFiles/IntelligentSystem.dir/io/OutputDevice.cpp.o CMakeFiles/IntelligentSystem.dir/io/FileManager.cpp.o CMakeFiles/IntelligentSystem.dir/controller/LogicController.cpp.o CMakeFiles/IntelligentSystem.dir/helper/Logger.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/field/Field.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/field/Type.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/field/Constraint.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/Ontology.cpp.o CMakeFiles/IntelligentSystem.dir/helper/Formatter.cpp.o CMakeFiles/IntelligentSystem.dir/meta/MetaData.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/OntologyInstance.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/Value.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/structures/Date.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/factory/OntologyFactory.cpp.o CMakeFiles/IntelligentSystem.dir/helper/Algorithm.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/query/Query.cpp.o
+build IntelligentSystem: CXX_EXECUTABLE_LINKER__IntelligentSystem_Debug CMakeFiles/IntelligentSystem.dir/main.cpp.o CMakeFiles/IntelligentSystem.dir/io/InputDevice.cpp.o CMakeFiles/IntelligentSystem.dir/io/OutputDevice.cpp.o CMakeFiles/IntelligentSystem.dir/io/FileManager.cpp.o CMakeFiles/IntelligentSystem.dir/controller/LogicController.cpp.o CMakeFiles/IntelligentSystem.dir/helper/Logger.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/field/Field.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/field/Type.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/field/Constraint.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/Ontology.cpp.o CMakeFiles/IntelligentSystem.dir/helper/Formatter.cpp.o CMakeFiles/IntelligentSystem.dir/meta/MetaData.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/OntologyInstance.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/Value.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/structures/Date.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/factory/OntologyFactory.cpp.o CMakeFiles/IntelligentSystem.dir/helper/Algorithm.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/query/Query.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/query/Decision.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/query/decision/WeightedDecision.cpp.o CMakeFiles/IntelligentSystem.dir/ontology/query/decision/Weight.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -mmacosx-version-min=15.6
   OBJECT_DIR = CMakeFiles/IntelligentSystem.dir
   POST_BUILD = :

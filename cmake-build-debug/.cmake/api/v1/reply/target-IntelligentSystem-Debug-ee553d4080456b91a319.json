@@ -66,7 +66,10 @@
 				27,
 				29,
 				31,
-				33
+				33,
+				35,
+				37,
+				39
 			]
 		}
 	],
@@ -116,7 +119,10 @@
 				27,
 				29,
 				31,
-				33
+				33,
+				35,
+				37,
+				39
 			]
 		},
 		{
@@ -139,7 +145,10 @@
 				28,
 				30,
 				32,
-				34
+				34,
+				36,
+				38,
+				40
 			]
 		}
 	],
@@ -336,6 +345,39 @@
 		{
 			"backtrace" : 1,
 			"path" : "ontology/query/Query.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ontology/query/Decision.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ontology/query/Decision.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ontology/query/decision/WeightedDecision.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ontology/query/decision/WeightedDecision.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ontology/query/decision/Weight.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ontology/query/decision/Weight.h",
 			"sourceGroupIndex" : 1
 		}
 	],

@@ -9,6 +9,7 @@
 #include "ontology/Value.h"
 #include "ontology/query/Query.h"
 #include "helper/Algorithm.h"
+#include "ontology/query/decision/WeightedDecision.h"
 
 int main(int argc, char** argv) {
     LogicController::run();

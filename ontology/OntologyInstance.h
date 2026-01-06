@@ -21,6 +21,8 @@ private:
 public:
     explicit OntologyInstance(const Ontology* ontology);
 
+    Ontology* getOntology() const;
+
     void setValue(const std::string& field, const Value& value);
     void setValue(const Field& fieldName, const Value& value);
     const Value& getValue(const std::string& field) const;
