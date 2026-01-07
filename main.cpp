@@ -4,6 +4,7 @@
 #include "ontology/Ontology.h"
 #include "ontology/OntologyInstance.h"
 #include "ontology/factory/OntologyFactory.h"
+#include "ontology/factory/RuleFactory.h"
 #include "helper/Formatter.h"
 #include "helper/Logger.h"
 #include "ontology/Value.h"
@@ -12,6 +13,7 @@
 #include "ontology/query/decision/WeightedDecision.h"
 #include "ontology/query/decision/Rule.h"
 #include "ontology/query/decision/RuleDecision.h"
+
 
 int main(int argc, char** argv) {
     LogicController::run();

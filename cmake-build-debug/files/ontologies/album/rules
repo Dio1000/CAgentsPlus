@@ -1,7 +1,7 @@
-rule "genre":
-IF EQUAL_TO("genre", "pop")
-THEN ADD 10
+rule:'genre'
+EQUAL_TO('genre':'pop')
+ADD 10.00
 
-rule "rating":
-IF GREATER_THAN("rating", 8)
-THEN MUL 2
+rule:'rating'
+GREATER_THAN('rating','release_date':'9','1.1.2000')
+MUL 2.00

@@ -11,20 +11,28 @@
 #include "../enum/Operation.h"
 #include "../../field/Field.h"
 #include "../../Value.h"
+#include "../../../io/InputDevice.h"
+#include "../../../io/OutputDevice.h"
+#include "../../../io/FileManager.h"
+#include "../../../meta/MetaData.h"
+#include "../../Ontology.h"
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 
 class Rule {
 private:
+    Ontology* ontology;
     std::string ruleName;
     QueryType query = DEFAULT_QUERY_TYPE;
     Operation operation = DEFAULT_OPERATION;
 
     std::vector<Field> fields;
     std::vector<Value> values;
-    double scoreValue;
+    double scoreValue = 0;
 public:
     Rule() = default;
-    Rule(const std::string& ruleName, const QueryType& query, const Operation& operation);
+    Rule(Ontology* ontology, const std::string& ruleName, const QueryType& query, const Operation& operation);
 
     std::string getRuleName() const;
     QueryType getQuery() const;
@@ -36,6 +44,7 @@ public:
     double getScoreValue() const;
 
     bool isEmpty() const;
+    void save() const;
 };
 
 

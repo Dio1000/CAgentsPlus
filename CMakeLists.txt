@@ -52,4 +52,6 @@ add_executable(IntelligentSystem main.cpp
         ontology/query/enum/QueryType.h
         ontology/query/enum/Operation.cpp
         ontology/query/enum/Operation.h
+        ontology/factory/RuleFactory.cpp
+        ontology/factory/RuleFactory.h
 )
