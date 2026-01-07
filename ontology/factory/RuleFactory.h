@@ -15,8 +15,8 @@ public:
     RuleFactory(const RuleFactory& other) = delete;
     RuleFactory& operator=(const RuleFactory& other) = delete;
 
-    static Rule getRule(Ontology* ontology, const std::string& ruleName);
-    static std::vector<Rule> getRules(Ontology* ontology);
+    static Rule* getRule(Ontology* ontology, const std::string& ruleName);
+    static std::vector<Rule*> getRules(Ontology* ontology);
 };
 
 

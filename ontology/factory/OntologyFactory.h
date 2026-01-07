@@ -21,7 +21,8 @@ public:
     OntologyFactory& operator=(const OntologyFactory& other) = delete;
 
     static Ontology getOntology(const std::string& ontologyName);
-    static OntologyInstance getOntologyInstance(Ontology* ontology, int index);
+    static OntologyInstance* getOntologyInstance(Ontology* ontology, int index);
+    static std::vector<OntologyInstance*> getOntologyInstances(Ontology* ontology);
 };
 
 

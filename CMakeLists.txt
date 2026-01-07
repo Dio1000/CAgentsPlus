@@ -54,4 +54,16 @@ add_executable(IntelligentSystem main.cpp
         ontology/query/enum/Operation.h
         ontology/factory/RuleFactory.cpp
         ontology/factory/RuleFactory.h
+        agent/message/Message.cpp
+        agent/message/Message.h
+        agent/message/MessageBus.cpp
+        agent/message/MessageBus.h
+        agent/Agent.cpp
+        agent/Agent.h
+        agent/agents/MusicAgent.cpp
+        agent/agents/MusicAgent.h
+        agent/agents/MusicPickerAgent.cpp
+        agent/agents/MusicPickerAgent.h
+        agent/SystemAgent.cpp
+        agent/SystemAgent.h
 )

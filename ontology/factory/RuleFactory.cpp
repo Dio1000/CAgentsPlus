@@ -10,7 +10,7 @@ std::string stripQuotes(const std::string& s) {
     return s;
 }
 
-Rule getRuleFromLines(Ontology* ontology, const std::vector<std::string>& lines) {
+Rule* getRuleFromLines(Ontology* ontology, const std::vector<std::string>& lines) {
     std::string ruleName = stripQuotes(Algorithm::split(lines[0], ':')[1]);
     std::vector<std::string> queryParts = Algorithm::split(lines[1], '(');
     QueryType queryType = ::fromStringToQueryType(queryParts[0]);
@@ -24,7 +24,7 @@ Rule getRuleFromLines(Ontology* ontology, const std::vector<std::string>& lines)
     Operation operation = ::fromStringToOperation(operationParts[0]);
     double scoreValue = std::stod(operationParts[1]);
 
-    Rule rule(ontology, ruleName, queryType, operation);
+    Rule* rule = new Rule(ontology, ruleName, queryType, operation);
     std::vector<Field> fields;
     std::vector<Value> values;
 
@@ -36,11 +36,11 @@ Rule getRuleFromLines(Ontology* ontology, const std::vector<std::string>& lines)
         fields.push_back(ontologyField);
         values.emplace_back(ontologyField.getType(), rawValue);
     }
-    rule.setData(fields, values, scoreValue);
+    rule->setData(fields, values, scoreValue);
     return rule;
 }
 
-Rule RuleFactory::getRule(Ontology *ontology, const std::string &ruleName) {
+Rule* RuleFactory::getRule(Ontology *ontology, const std::string &ruleName) {
     std::string rulePath = MetaData::getRulesPath(ontology->getName());
     std::vector<std::string> lines = InputDevice::readLines(rulePath);
 
@@ -58,10 +58,10 @@ Rule RuleFactory::getRule(Ontology *ontology, const std::string &ruleName) {
     return {};
 }
 
-std::vector<Rule> RuleFactory::getRules(Ontology *ontology) {
+std::vector<Rule*> RuleFactory::getRules(Ontology *ontology) {
     std::string rulePath = MetaData::getRulesPath(ontology->getName());
     std::vector<std::string> lines = InputDevice::readLines(rulePath);
-    std::vector<Rule> rules;
+    std::vector<Rule*> rules;
 
     int index = 0;
     while (index < lines.size()) {
