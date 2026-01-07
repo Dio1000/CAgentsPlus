@@ -7,11 +7,13 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 class InputDevice {
 public:
     static std::vector<std::string> readLines(const std::string& path);
     static std::string readLine(const std::string& path, int index);
+    static std::string readLineFromKeyboard();
 };
 
 

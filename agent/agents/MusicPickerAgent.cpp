@@ -6,7 +6,7 @@
 
 void MusicPickerAgent::pickMusic() const {
     std::cout << "Picking music...\n";
-    std::string songPath = MetaData::FILES_ROOT_DIRECTORY + "/others/" + ruleDecision->getWorstDecision()->getValue("name").getTEXT() + ".m4a";
+    std::string songPath = MetaData::FILES_ROOT_DIRECTORY + "/others/" + ruleDecision->getBestDecision()->getValue("name").getTEXT() + ".m4a";
     Message message = Message(agentID, INFO, songPath);
     MessageBus::send(1, message);
 }

@@ -18,7 +18,7 @@ public:
     Formatter& operator=(const Formatter& other) = delete;
 
     static void formatMetaOntology(const Ontology& ontology);
-    static void formatDataOntology(const Ontology& ontology);
+    static void formatMetaOntology(Ontology* ontology);
 };
 
 

@@ -1,0 +1,4 @@
+name,TEXT,NOT_NULL
+artist,TEXT,NOT_NULL
+album,TEXT,NULLABLE
+rating,REAL,NOT_NULL

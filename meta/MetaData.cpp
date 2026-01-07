@@ -3,6 +3,7 @@
 //
 
 #include "MetaData.h"
+#include "../ontology/Ontology.h"
 
 std::string MetaData::FILES_ROOT_DIRECTORY = "./files";
 std::string MetaData::ONTOLOGY_ROOT_DIRECTORY = MetaData::FILES_ROOT_DIRECTORY + "/ontologies";
@@ -36,4 +37,17 @@ void MetaData::incrementRowID(const std::string& ontologyName) {
     currentRowID++;
 
     OutputDevice::replaceLine(rowIDPath, std::to_string(currentRowID));
+}
+
+Field MetaData::getField(Ontology *ontology, const std::string &fieldName) {
+    std::string metaDataPath = getMetaDataPath(ontology->getName());
+    std::vector<std::string> lines = InputDevice::readLines(metaDataPath);
+
+    for (const std::string& line : lines) {
+        if (line.rfind(fieldName, 0) == 0) {
+            std::vector<std::string> parts = Algorithm::split(line, ',');
+            return {parts[0], ::fromStringToType(parts[1]), ::fromStringToConstraint(parts[2])};
+        }
+    }
+    return {};
 }

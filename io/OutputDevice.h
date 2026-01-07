@@ -14,8 +14,8 @@ public:
     static void writeLine(const std::string& path, const std::string& line);
     static void replaceLine(const std::string& path, const std::string& line);
 
-    static void writeToScreen(const std::string& line);
-
+    static void write(const std::string& line);
+    static void writeNewLine(const std::string& line);
 };
 
 

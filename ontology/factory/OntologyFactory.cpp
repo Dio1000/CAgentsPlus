@@ -4,7 +4,7 @@
 
 #include "OntologyFactory.h"
 
-Ontology OntologyFactory::getOntology(const std::string &ontologyName) {
+Ontology* OntologyFactory::getOntology(const std::string &ontologyName) {
     std::string ontologyPath = MetaData::getMetaDataPath(ontologyName);
     std::vector<std::string> lines = InputDevice::readLines(ontologyPath);
 
@@ -17,7 +17,7 @@ Ontology OntologyFactory::getOntology(const std::string &ontologyName) {
         fields.emplace_back(field);
     }
 
-    return {ontologyName, fields};
+    return new Ontology{ontologyName, fields};
 }
 
 OntologyInstance* OntologyFactory::getOntologyInstance(Ontology* ontology, int index) {

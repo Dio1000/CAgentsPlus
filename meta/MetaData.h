@@ -7,7 +7,11 @@
 
 #include "../io/InputDevice.h"
 #include "../io/OutputDevice.h"
+#include "../ontology/field/Field.h"
+#include "../helper/Algorithm.h"
 #include <string>
+
+class Ontology;
 
 struct MetaData {
 public:
@@ -23,6 +27,8 @@ public:
     static std::string getRulesPath(const std::string& ontologyName);
     static int getRowID(const std::string& ontologyName);
     static void incrementRowID(const std::string& ontologyName);
+
+    static Field getField(Ontology* ontology, const std::string& fieldName);
 };
 
 

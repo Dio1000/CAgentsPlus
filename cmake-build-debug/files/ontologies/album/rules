@@ -2,6 +2,6 @@ rule:'genre'
 EQUAL_TO('genre':'pop')
 ADD 10.00
 
-rule:'rating'
-GREATER_THAN('rating','release_date':'9','1.1.2000')
+rule:'rosalia'
+EQUAL_TO('artist':'?')
 MUL 2.00

@@ -48,3 +48,9 @@ std::string InputDevice::readLine(const std::string& path, int index) {
     fin.close();
     throw std::runtime_error("Line index out of range!");
 }
+
+std::string InputDevice::readLineFromKeyboard() {
+    std::string string;
+    std::cin >> string;
+    return string;
+}

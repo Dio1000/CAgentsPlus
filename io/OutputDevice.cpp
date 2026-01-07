@@ -27,7 +27,11 @@ void OutputDevice::writeLine(const std::string &path, const std::string &line) {
     fout.close();
 }
 
-void OutputDevice::writeToScreen(const std::string &line) {
+void OutputDevice::write(const std::string &line) {
+    std::cout << line;
+}
+
+void OutputDevice::writeNewLine(const std::string &line) {
     std::cout << line << '\n';
 }
 
