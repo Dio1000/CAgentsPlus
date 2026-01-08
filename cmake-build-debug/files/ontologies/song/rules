@@ -1,4 +1,8 @@
 rule:'rating'
-GREATER_THAN('rating':'7.5')
+GREATER_THAN('rating':'<?>')
+ADD 20.00
+
+rule:'artist'
+EQUAL_TO('artist':'<?>')
 ADD 20.00
 

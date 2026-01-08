@@ -12,6 +12,12 @@ Value::Value()
 Value::Value(Type type, ValueData data)
         : type(type), data(std::move(data)), empty(false) {}
 
+Value::Value(const WildCard& wildCard) {
+    this->type = DEFAULT_TYPE;
+    this->empty = false;
+    this->wildCard = wildCard;
+}
+
 Type Value::getType() const {
     return type;
 }
@@ -57,9 +63,8 @@ const Date& Value::getDATE() const {
 }
 
 std::string Value::toString() const {
-    if (empty) {
-        return "NULL";
-    }
+    if (empty) return "NULL";
+    if (isWildCard()) return "<?>";
 
     switch (type) {
         case INT:
@@ -122,4 +127,13 @@ bool Value::lesserOrEqualThan(const Value &other) const {
     if (type != other.type) return false;
 
     return data <= other.data;
+}
+
+bool Value::isWildCard() const {
+    return !wildCard.isEmpty();
+}
+
+void Value::setData(Type _type, ValueData _data) {
+    this->type = _type;
+    this->data = _data;
 }

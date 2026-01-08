@@ -66,4 +66,6 @@ add_executable(IntelligentSystem main.cpp
         agent/agents/MusicPickerAgent.h
         agent/SystemAgent.cpp
         agent/SystemAgent.h
+        ontology/structures/WildCard.cpp
+        ontology/structures/WildCard.h
 )

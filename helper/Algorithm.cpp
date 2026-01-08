@@ -42,3 +42,8 @@ void Algorithm::toLower(std::string &data) {
     std::transform(data.begin(), data.end(), data.begin(),
                    [](unsigned char c){ return std::tolower(c); });
 }
+
+void Algorithm::toUpper(std::string &data) {
+    std::transform(data.begin(), data.end(), data.begin(),
+                   [](unsigned char c){ return std::toupper(c); });
+}

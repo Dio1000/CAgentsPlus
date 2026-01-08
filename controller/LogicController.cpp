@@ -2,6 +2,7 @@
 // Created by Darian Sandru on 05.01.2026.
 //
 
+#include <unistd.h>
 #include "LogicController.h"
 #include "../ontology/factory/OntologyFactory.h"
 #include "../ontology/factory/RuleFactory.h"
@@ -241,7 +242,16 @@ void LogicController::createRule() {
 
         bool validValues = true;
         for (int i = 0 ; i < valueNamesParts.size() ; i++) {
+            Value value;
             std::string sanitisedValue = Algorithm::strip(valueNamesParts[i], ' ');
+            std::string wildCard = sanitisedValue;
+            Algorithm::toLower(wildCard);
+            if (sanitisedValue == "wildcard" || sanitisedValue == "wild" || sanitisedValue == "card") {
+                value = Value(WildCard("value"));
+                valueNames.emplace_back(value);
+                continue;
+            }
+
             Type currentType = fields[i].getType();
             int day = -1;
             int month = -1;
@@ -253,7 +263,6 @@ void LogicController::createRule() {
                 year = std::stoi(dateParts[2]);
             }
 
-            Value value;
             switch (currentType) {
                 case INT:
                     value = {currentType, std::stoi(sanitisedValue)};
@@ -317,21 +326,29 @@ void LogicController::createRule() {
 }
 
 void LogicController::run() {
-    if (!checkValidity()) return;
-
-    Ontology* ontology = OntologyFactory::getOntology("album");
+    Ontology* ontology = OntologyFactory::getOntology("song");
     auto instances = OntologyFactory::getOntologyInstances(ontology);
     auto rules = RuleFactory::getRules(ontology);
 
     RuleDecision decision(instances, rules);
+
+    Rule* rule = decision.getRuleByName("artist");
+    rule->setField("artist", Value(TEXT, "Rosalia"));
+    Rule* rule1 = decision.getRuleByName("rating");
+    rule1->setField("rating", Value(REAL, 8.0f));
+    decision.getBestDecision();
+
     SystemAgent system;
 
-    auto musicAgent = std::make_unique<MusicAgent>(1, &decision, nullptr);
+    auto musicAgent = std::make_unique<MusicAgent>(1, nullptr, nullptr);
     auto musicPickerAgent = std::make_unique<MusicPickerAgent>(2, &decision, nullptr);
+
     system.addAgent(std::move(musicAgent));
     system.addAgent(std::move(musicPickerAgent));
 
-    MessageBus::send(2, Message{0, INFO, "PICK"});
     system.start();
-    std::this_thread::sleep_for(std::chrono::seconds(1000));
+    MessageBus::send(2, Message{0, INFO, "PICK"});
+
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+    system.stop();
 }

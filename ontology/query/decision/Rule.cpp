@@ -58,7 +58,8 @@ void Rule::save() const {
 
     for (size_t i = 0; i < values.size(); ++i) {
         const Value& v = values[i];
-        if (v.getType() == TEXT) ruleString += v.toString();
+        if (v.isWildCard()) ruleString += "<?>";
+        else if (v.getType() == TEXT) ruleString += v.toString();
         else ruleString += "'" + v.toString() + "'";
 
         if (i + 1 < values.size()) ruleString += ",";
@@ -71,5 +72,37 @@ void Rule::save() const {
     ruleString += ::toString(operation) + " " + scoreStream.str() + "\n";
     std::string rulePath = MetaData::getRulesPath(ontology->getName());
     OutputDevice::writeLine(rulePath, ruleString);
+}
+
+void Rule::setField(const std::string &name, const Value &value) {
+    int i = 0;
+    for (const Field& field : fields) {
+        if (field.getName() == name) break;
+        i++;
+    }
+
+    Type type = fields[i].getType();
+    switch (type) {
+        case INT:
+            values[i].setData(type, value.getINT());
+            break;
+        case REAL:
+            values[i].setData(type, value.getREAL());
+            break;
+        case BIGINT:
+            values[i].setData(type, value.getBIGINT());
+            break;
+        case DATE:
+            values[i].setData(type, value.getDATE());
+            break;
+        case BOOL:
+            values[i].setData(type, value.getBOOL());
+            break;
+        case TEXT:
+            values[i].setData(type, value.getTEXT());
+            break;
+        case DEFAULT_TYPE:
+            return;
+    }
 }
 

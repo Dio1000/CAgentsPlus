@@ -24,6 +24,8 @@ public:
     OntologyInstance* getBestDecision() override;
     OntologyInstance* getWorstDecision() override;
     std::vector<OntologyInstance*> rankDecisions() override;
+
+    Rule* getRuleByName(const std::string& name);
 };
 
 

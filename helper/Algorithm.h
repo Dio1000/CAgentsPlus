@@ -18,6 +18,7 @@ public:
     static std::vector<std::string> split(const std::string& line, const char& regex);
     static std::string strip(const std::string& line, const char& regex);
     static void toLower(std::string& data);
+    static void toUpper(std::string& data);
 };
 
 

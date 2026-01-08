@@ -30,11 +30,15 @@ Rule* getRuleFromLines(Ontology* ontology, const std::vector<std::string>& lines
 
     for (size_t i = 0; i < fieldNames.size(); ++i) {
         std::string fieldName = stripQuotes(fieldNames[i]);
-        std::string rawValue  = stripQuotes(valueStrings[i]);
+        std::string rawValue = stripQuotes(valueStrings[i]);
 
         const Field& ontologyField = ontology->getField(fieldName);
         fields.push_back(ontologyField);
-        values.emplace_back(ontologyField.getType(), rawValue);
+
+        if (rawValue == "<?>") {
+            values.emplace_back(WildCard("value"));
+        }
+        else values.emplace_back(ontologyField.getType(), rawValue);
     }
     rule->setData(fields, values, scoreValue);
     return rule;

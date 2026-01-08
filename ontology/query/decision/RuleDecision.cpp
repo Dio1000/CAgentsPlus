@@ -88,3 +88,10 @@ std::vector<OntologyInstance*> RuleDecision::rankDecisions() {
     return instances;
 }
 
+Rule *RuleDecision::getRuleByName(const std::string &name) {
+    for (Rule* rule : rules) {
+        if (rule->getRuleName() == name) return rule;
+    }
+    return nullptr;
+}
+

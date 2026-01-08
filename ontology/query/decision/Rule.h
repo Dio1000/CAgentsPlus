@@ -39,6 +39,8 @@ public:
     Operation getOperation() const;
 
     void setData(const std::vector<Field>& fields, const std::vector<Value>& values, double scoreValue);
+    void setField(const std::string& name, const Value& value);
+
     std::vector<Field> getFields() const;
     std::vector<Value> getValues() const;
     double getScoreValue() const;
