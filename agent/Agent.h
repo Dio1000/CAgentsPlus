@@ -6,9 +6,12 @@
 #define INTELLIGENTSYSTEM_AGENT_H
 
 #include <thread>
+#include <map>
 #include "../ontology/query/decision/RuleDecision.h"
 #include "../ontology/query/decision/WeightedDecision.h"
+#include "../ontology/factory/OntologyFactory.h"
 #include "message/MessageBus.h"
+#include "AgentMetaData.h"
 
 class Agent {
 protected:

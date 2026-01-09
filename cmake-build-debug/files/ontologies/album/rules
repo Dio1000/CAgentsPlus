@@ -1,7 +1,0 @@
-rule:'genre'
-EQUAL_TO('genre':'pop')
-ADD 10.00
-
-rule:'rosalia'
-EQUAL_TO('artist':'?')
-MUL 2.00

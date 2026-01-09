@@ -6,6 +6,7 @@
 #include "../ontology/Ontology.h"
 
 std::string MetaData::FILES_ROOT_DIRECTORY = "./files";
+std::string MetaData::OTHERS_ROOT_DIRECTORY = "./files/others";
 std::string MetaData::ONTOLOGY_ROOT_DIRECTORY = MetaData::FILES_ROOT_DIRECTORY + "/ontologies";
 std::string MetaData::ONTOLOGY_META_FILE = "/meta";
 std::string MetaData::ONTOLOGY_ROWID_FILE = "/rowID";

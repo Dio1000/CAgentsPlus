@@ -50,7 +50,7 @@ std::string InputDevice::readLine(const std::string& path, int index) {
 }
 
 std::string InputDevice::readLineFromKeyboard() {
-    std::string string;
-    std::cin >> string;
-    return string;
+    std::string line;
+    std::getline(std::cin, line);
+    return line;
 }

@@ -38,6 +38,27 @@ double WeightedDecision::getWeight(OntologyInstance* instance) const {
                 score += fieldWeight * (value.getBOOL() ? 1.0 : 0.0);
                 break;
 
+            case DATE: {
+                const Date& d = value.getDATE();
+
+                std::tm songTime{};
+                songTime.tm_mday = d.getDay();
+                songTime.tm_mon  = d.getMonth() - 1;
+                songTime.tm_year = d.getYear() - 1900;
+                songTime.tm_isdst = -1;
+
+                std::time_t songEpoch = std::mktime(&songTime);
+                std::time_t nowEpoch = std::time(nullptr);
+
+                if (songEpoch > nowEpoch) songEpoch = nowEpoch;
+
+                constexpr double MAX_DAYS = 3650.0;
+                double daysDiff = std::difftime(nowEpoch, songEpoch) / (60 * 60 * 24);
+
+                double normalized = 1.0 - std::min(daysDiff / MAX_DAYS, 1.0);
+                score += normalized * 10.0;
+                break;
+            }
             default:
                 break;
         }
@@ -65,4 +86,8 @@ std::vector<OntologyInstance*> WeightedDecision::rankDecisions() {
               });
 
     return instances;
+}
+
+void WeightedDecision::removeWeight(const std::string &name) {
+    this->weight.removeWeight(name);
 }

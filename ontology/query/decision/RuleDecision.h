@@ -26,6 +26,7 @@ public:
     std::vector<OntologyInstance*> rankDecisions() override;
 
     Rule* getRuleByName(const std::string& name);
+    void removeRuleByName(const std::string& name);
 };
 
 

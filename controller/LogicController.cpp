@@ -2,12 +2,14 @@
 // Created by Darian Sandru on 05.01.2026.
 //
 
-#include <unistd.h>
 #include "LogicController.h"
 #include "../ontology/factory/OntologyFactory.h"
 #include "../ontology/factory/RuleFactory.h"
 #include "../agent/agents/MusicAgent.h"
 #include "../agent/agents/MusicPickerAgent.h"
+#include "../agent/agents/UserAgent.h"
+#include "../agent/agents/AnalystAgent.h"
+#include "../agent/AgentMetaData.h"
 
 bool LogicController::checkFileValidity() {
     bool filesValid = true;
@@ -26,6 +28,7 @@ bool LogicController::checkFileValidity() {
 bool LogicController::checkAgentValidity() {
     bool agentsValid = true;
 
+    if (!AgentMetaData::checkIDValidity()) agentsValid = false;
     return agentsValid;
 }
 
@@ -56,6 +59,13 @@ void LogicController::init(const std::string& flag) {
     if (flag == "ontology") createOntology();
     else if (flag == "instance") createInstance();
     else if (flag == "rule") createRule();
+}
+
+void LogicController::init(const std::string& flag, const std::string& path) {
+    if (!checkValidity()) return;
+    std::string fullPath = MetaData::OTHERS_ROOT_DIRECTORY + "/" + path;
+
+    if (flag == "file") createInstancesFromFile(fullPath);
 }
 
 void LogicController::createOntology() {
@@ -176,6 +186,102 @@ void LogicController::createInstance() {
     ontologyInstance->save();
     OutputDevice::writeNewLine("Ontology Instance created successfully!");
     delete ontologyInstance;
+}
+
+void LogicController::createInstancesFromFile(const std::string& filePath) {
+    if (!FileManager::fileExists(filePath)) {
+        OutputDevice::writeNewLine("File '" + filePath + "' does not exist!");
+        return;
+    }
+
+    std::string ontologyName;
+    bool validName;
+    do {
+        OutputDevice::write("Ontology name to create instances for: ");
+        ontologyName = InputDevice::readLineFromKeyboard();
+        std::string ontologyPath = MetaData::ONTOLOGY_ROOT_DIRECTORY + "/" + ontologyName;
+        validName = FileManager::directoryExists(ontologyPath);
+
+        if (!validName)
+            OutputDevice::writeNewLine("Ontology '" + ontologyName + "' does not exist!");
+    } while (!validName);
+
+    Ontology* ontology = OntologyFactory::getOntology(ontologyName);
+    std::vector<Field> fields = ontology->getFields();
+
+    std::vector<std::string> lines = InputDevice::readLines(filePath);
+
+    for (const std::string& line : lines) {
+        if (line.empty()) continue;
+
+        std::vector<std::string> values = Algorithm::split(line, ',');
+
+        if (values.size() != fields.size()) {
+            OutputDevice::writeNewLine(
+                    "Skipping line (field count mismatch): " + line
+            );
+            continue;
+        }
+
+        auto* ontologyInstance = new OntologyInstance(ontology);
+
+        for (size_t i = 0; i < fields.size(); i++) {
+            const Field& field = fields[i];
+            const std::string& rawValue = values[i];
+
+            std::string fieldName = field.getName();
+            Type type = field.getType();
+            Constraint constraint = field.getConstraint();
+
+            try {
+                int day = -1, month = -1, year = -1;
+
+                if (type == DATE) {
+                    std::vector<std::string> dateParts = Algorithm::split(rawValue, '.');
+                    day = std::stoi(dateParts[0]);
+                    month = std::stoi(dateParts[1]);
+                    year = std::stoi(dateParts[2]);
+                }
+
+                switch (type) {
+                    case INT:
+                        ontologyInstance->setValue(fieldName, {type, std::stoi(rawValue)});
+                        break;
+                    case REAL:
+                        ontologyInstance->setValue(fieldName, {type, std::stof(rawValue)});
+                        break;
+                    case BIGINT:
+                        ontologyInstance->setValue(fieldName, {type, std::stol(rawValue)});
+                        break;
+                    case DATE:
+                        ontologyInstance->setValue(fieldName, {type, Date(day, month, year)});
+                        break;
+                    case BOOL:
+                        ontologyInstance->setValue(
+                                fieldName,
+                                {type, (rawValue == "1" || rawValue == "true")}
+                        );
+                        break;
+                    case TEXT:
+                        ontologyInstance->setValue(fieldName, {type, rawValue});
+                        break;
+                    case DEFAULT_TYPE:
+                        OutputDevice::writeNewLine(
+                                "Invalid type for field '" + fieldName + "'"
+                        );
+                        break;
+                }
+            }
+            catch (const std::exception&) {
+                OutputDevice::writeNewLine("Invalid value '" + rawValue + "' for field '" + fieldName + "'");
+            }
+        }
+
+        ontologyInstance->save();
+        delete ontologyInstance;
+    }
+
+    OutputDevice::writeNewLine("Ontology instances created successfully from file!");
 }
 
 void LogicController::createRule() {
@@ -326,29 +432,30 @@ void LogicController::createRule() {
 }
 
 void LogicController::run() {
+    checkValidity();
     Ontology* ontology = OntologyFactory::getOntology("song");
     auto instances = OntologyFactory::getOntologyInstances(ontology);
+
     auto rules = RuleFactory::getRules(ontology);
+    RuleDecision ruleDecision(instances, rules);
 
-    RuleDecision decision(instances, rules);
-
-    Rule* rule = decision.getRuleByName("artist");
-    rule->setField("artist", Value(TEXT, "Rosalia"));
-    Rule* rule1 = decision.getRuleByName("rating");
-    rule1->setField("rating", Value(REAL, 8.0f));
-    decision.getBestDecision();
+    std::unordered_map<std::string, double> weights = {{"rating", 0.5}, {"release_date", 0.25}, {"length", -0.25}};
+    Weight weight{weights};
+    WeightedDecision weightedDecision{instances, weight};
 
     SystemAgent system;
+    auto userAgent = std::make_unique<UserAgent>(AgentMetaData::USER_AGENT_ID, nullptr, nullptr);
+    auto analystAgent = std::make_unique<AnalystAgent>(AgentMetaData::ANALYST_AGENT_ID, nullptr, nullptr);
+    auto musicPickerAgent = std::make_unique<MusicPickerAgent>(AgentMetaData::MUSIC_PICKER_AGENT_ID, &ruleDecision, &weightedDecision);
+    auto musicAgent = std::make_unique<MusicAgent>(AgentMetaData::MUSIC_AGENT_ID, nullptr, nullptr);
 
-    auto musicAgent = std::make_unique<MusicAgent>(1, nullptr, nullptr);
-    auto musicPickerAgent = std::make_unique<MusicPickerAgent>(2, &decision, nullptr);
-
+    system.addAgent(std::move(userAgent));
+    system.addAgent(std::move(analystAgent));
     system.addAgent(std::move(musicAgent));
     system.addAgent(std::move(musicPickerAgent));
 
     system.start();
-    MessageBus::send(2, Message{0, INFO, "PICK"});
-
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    MessageBus::send(AgentMetaData::USER_AGENT_ID, Message(AgentMetaData::SYSTEM_AGENT_ID, INFO, "start"));
+    std::this_thread::sleep_for(std::chrono::seconds(1000));
     system.stop();
 }

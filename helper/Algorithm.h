@@ -15,7 +15,7 @@ public:
     Algorithm(const Algorithm& other) = delete;
     Algorithm& operator=(const Algorithm& other) = delete;
 
-    static std::vector<std::string> split(const std::string& line, const char& regex);
+    static std::vector<std::string> split(const std::string& line, char delimiter);
     static std::string strip(const std::string& line, const char& regex);
     static void toLower(std::string& data);
     static void toUpper(std::string& data);

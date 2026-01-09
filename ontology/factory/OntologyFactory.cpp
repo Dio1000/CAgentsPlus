@@ -4,6 +4,21 @@
 
 #include "OntologyFactory.h"
 
+namespace fs = std::filesystem;
+
+int getDataIndex(const std::string& path) {
+    size_t index = path.size() - 1;
+    std::string dataString;
+    while (index != 0) {
+        if (path[index] == '/' || path[index] == '\\') break;
+        dataString += path[index];
+        index--;
+    }
+
+    std::reverse(dataString.begin(), dataString.end());
+    return std::stoi(dataString);
+}
+
 Ontology* OntologyFactory::getOntology(const std::string &ontologyName) {
     std::string ontologyPath = MetaData::getMetaDataPath(ontologyName);
     std::vector<std::string> lines = InputDevice::readLines(ontologyPath);
@@ -82,6 +97,15 @@ std::vector<OntologyInstance*> OntologyFactory::getOntologyInstances(Ontology *o
     std::vector<OntologyInstance*> instances;
     instances.reserve(rowID);
 
-    for (int i = 0 ; i < rowID ; i++) instances.emplace_back(getOntologyInstance(ontology, i));
+    std::string pathString = MetaData::ONTOLOGY_ROOT_DIRECTORY + "/" + ontology->getName() + MetaData::ONTOLOGY_DATA_DIRECTORY;
+    struct stat sb{};
+
+    for (const auto& entry : fs::directory_iterator(pathString)) {
+        const std::filesystem::path& outFileName = entry.path();
+        std::string outFileNameString = outFileName.string();
+        const char* path = outFileNameString.c_str();
+
+        if (stat(path, &sb) == 0 && !(sb.st_mode & S_IFDIR)) instances.emplace_back(getOntologyInstance(ontology, getDataIndex(path)));
+    }
     return instances;
 }

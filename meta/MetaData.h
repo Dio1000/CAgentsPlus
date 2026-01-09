@@ -16,6 +16,7 @@ class Ontology;
 struct MetaData {
 public:
     static std::string FILES_ROOT_DIRECTORY;
+    static std::string OTHERS_ROOT_DIRECTORY;
     static std::string ONTOLOGY_ROOT_DIRECTORY;
     static std::string ONTOLOGY_META_FILE;
     static std::string ONTOLOGY_ROWID_FILE;

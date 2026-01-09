@@ -9,12 +9,17 @@
 #include <string>
 
 class MusicPickerAgent : public Agent {
+private:
+    std::vector<std::string> availableSongs;
+    void setup(const std::string& message);
+
+    void sendInfo(const std::string& message);
 public:
     MusicPickerAgent(size_t agentID, RuleDecision* rd, WeightedDecision* wd)
     : Agent(agentID, rd, wd) {MessageBus::registerAgent(agentID);}
 
     void run() override;
-    void pickMusic() const;
+    void pickMusic(const std::string& message);
 };
 
 

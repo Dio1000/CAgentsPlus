@@ -4,19 +4,17 @@
 
 #include "Algorithm.h"
 
-std::vector<std::string> Algorithm::split(const std::string &line, const char &regex) {
-    std::string strippedLine = Algorithm::strip(line, regex);
+std::vector<std::string> Algorithm::split(const std::string& line, char delimiter) {
     std::vector<std::string> output;
-    std::string currentString;
-    for (const char& ch : strippedLine) {
-        if (ch == regex && !currentString.empty()) {
-            output.emplace_back(currentString);
-            currentString = "";
+    std::string current;
+    for (char ch : line) {
+        if (ch == delimiter) {
+            output.push_back(current);
+            current.clear();
         }
-        else currentString += ch;
+        else current += ch;
     }
-
-    if (!currentString.empty()) output.emplace_back(currentString);
+    output.push_back(current);
     return output;
 }
 

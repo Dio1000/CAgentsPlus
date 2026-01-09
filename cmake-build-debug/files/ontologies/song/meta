@@ -1,4 +1,8 @@
 name,TEXT,NOT_NULL
-artist,TEXT,NOT_NULL
 album,TEXT,NULLABLE
-rating,REAL,NOT_NULL
+artist,TEXT,NOT_NULL
+genre,TEXT,NOT_NULL
+rating,REAL,NULLABLE
+length,REAL,NOT_NULL
+release_date,DATE,NOT_NULL
+language,TEXT,NULLABLE

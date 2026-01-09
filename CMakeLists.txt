@@ -68,4 +68,10 @@ add_executable(IntelligentSystem main.cpp
         agent/SystemAgent.h
         ontology/structures/WildCard.cpp
         ontology/structures/WildCard.h
+        agent/agents/UserAgent.cpp
+        agent/agents/UserAgent.h
+        agent/agents/AnalystAgent.cpp
+        agent/agents/AnalystAgent.h
+        agent/AgentMetaData.cpp
+        agent/AgentMetaData.h
 )

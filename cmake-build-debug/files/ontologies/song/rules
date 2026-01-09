@@ -1,8 +1,15 @@
-rule:'rating'
-GREATER_THAN('rating':'<?>')
-ADD 20.00
-
 rule:'artist'
 EQUAL_TO('artist':'<?>')
-ADD 20.00
+ADD 30
 
+rule:'album'
+EQUAL_T0('album':'<?>')
+ADD 15
+
+rule:'genre'
+EQUAL_TO('genre':'<?>')
+ADD 10
+
+rule:'language'
+EQUAL_TO('language':'<?>')
+ADD 5

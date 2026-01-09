@@ -13,6 +13,8 @@
 #include "../../helper/Algorithm.h"
 #include "../structures/Date.h"
 #include "../OntologyInstance.h"
+#include <filesystem>
+#include <sys/stat.h>
 
 class OntologyFactory {
 public:

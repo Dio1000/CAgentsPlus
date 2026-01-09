@@ -21,6 +21,8 @@ public:
     OntologyInstance* getBestDecision() override;
     OntologyInstance* getWorstDecision() override;
     std::vector<OntologyInstance*> rankDecisions() override;
+
+    void removeWeight(const std::string& name);
 };
 
 

@@ -13,6 +13,10 @@ double Weight::getFieldWeight(const std::string& field) const {
     return (it != weights.end()) ? it->second : 0.0;
 }
 
+void Weight::removeWeight(const std::string& weightName) {
+    this->weights.erase(weightName);
+}
+
 
 
 

@@ -21,10 +21,12 @@ private:
 
     static void createOntology();
     static void createInstance();
+    static void createInstancesFromFile(const std::string& filePath);
     static void createRule();
 public:
     static bool checkValidity();
     static void init(const std::string& flag);
+    static void init(const std::string& flag, const std::string& path);
     static void run();
 };
 

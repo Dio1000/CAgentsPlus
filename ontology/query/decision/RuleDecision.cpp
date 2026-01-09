@@ -95,3 +95,14 @@ Rule *RuleDecision::getRuleByName(const std::string &name) {
     return nullptr;
 }
 
+void RuleDecision::removeRuleByName(const std::string &name) {
+    int index = 0;
+    for (Rule* rule : rules) {
+        if (rule->getRuleName() == name) {
+            rules.erase(rules.begin() + index);
+            return;
+        }
+        index++;
+    }
+}
+

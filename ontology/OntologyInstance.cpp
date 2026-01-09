@@ -78,7 +78,7 @@ const Value& OntologyInstance::getValue(const std::string& field) const {
 }
 
 bool OntologyInstance::hasField(const std::string &field) const {
-    return !ontology->hasField(field);
+    return ontology->hasField(field);
 }
 
 std::string OntologyInstance::toString() const {
