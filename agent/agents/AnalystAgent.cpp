@@ -7,10 +7,8 @@
 namespace {
     std::string normalize(std::string s) {
         Algorithm::toLower(s);
-        s.erase(s.begin(), std::find_if(s.begin(), s.end(),
-                                        [](unsigned char ch) { return !std::isspace(ch); }));
-        s.erase(std::find_if(s.rbegin(), s.rend(),
-                             [](unsigned char ch) { return !std::isspace(ch); }).base(), s.end());
+        s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) { return !std::isspace(ch); }));
+        s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) { return !std::isspace(ch); }).base(), s.end());
 
         std::string out;
         bool prevSpace = false;
@@ -39,7 +37,7 @@ namespace {
 void AnalystAgent::start(const std::string& message) {
     OutputDevice::writeNewLine("Analyst Agent, with ID: " + std::to_string(AgentMetaData::ANALYST_AGENT_ID) + ", speaking:");
     std::vector<std::string> parts = Algorithm::split(message, ':');
-    if (parts.size() != 8) {
+    if (parts.size() != 8 && parts.size() != 2) {
         sendResponse("Invalid request format.", AgentMetaData::USER_AGENT_ID);
         return;
     }
@@ -47,8 +45,8 @@ void AnalystAgent::start(const std::string& message) {
     if (!parts[0].empty() && normalize(parts[1]) == "end") {
         std::vector<std::string> songs = normalizeList(Algorithm::split(parts[0], ','));
         std::string messageString = "play:";
-        for (const std::string& song : songs)
-            messageString += song + ",";
+        for (const std::string& song : songs) messageString += song + ",";
+
         if (!songs.empty()) messageString.pop_back();
         sendInfo(messageString);
         return;
@@ -58,8 +56,7 @@ void AnalystAgent::start(const std::string& message) {
     if (normalize(parts[0]) != "na") {
         auto rawSongs = normalizeList(Algorithm::split(parts[0], ','));
         for (const auto& s : rawSongs)
-            if (!s.empty())
-                songs.push_back(s);
+            if (!s.empty()) songs.push_back(s);
     }
 
     std::string album = normalize(parts[1]);
@@ -82,6 +79,7 @@ void AnalystAgent::sendInfo(const std::string& message) {
 }
 
 void AnalystAgent::sendResponse(const std::string& message, const size_t& receiver) {
+    OutputDevice::writeNewLine("Analysis failed!\n");
     Message msg(AgentMetaData::ANALYST_AGENT_ID, RESPONSE, message);
     MessageBus::send(receiver, msg);
 }

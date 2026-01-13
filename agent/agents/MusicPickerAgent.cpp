@@ -67,12 +67,12 @@ void MusicPickerAgent::setup(const std::string& message) {
 void MusicPickerAgent::pickMusic(const std::string& message) {
     OutputDevice::writeNewLine("Music Picker Agent, with ID: " + std::to_string(AgentMetaData::MUSIC_PICKER_AGENT_ID) + ", speaking:");
     OutputDevice::writeNewLine("Picking music...");
-    setup(message);
 
     Ontology* ontology = OntologyFactory::getOntology("song");
     std::vector<OntologyInstance*> instances = OntologyFactory::getOntologyInstances(ontology);
     std::unordered_map<double, std::vector<OntologyInstance*>> scoreInstanceMap;
     std::vector<double> scores;
+    setup(message);
 
     for (OntologyInstance* instance : instances) {
         const std::string name = normalize(instance->getValue("name").getTEXT());
@@ -87,6 +87,7 @@ void MusicPickerAgent::pickMusic(const std::string& message) {
     }
 
     std::sort(scores.begin(), scores.end());
+    scores.erase(std::unique(scores.begin(), scores.end()), scores.end());
     std::reverse(scores.begin(), scores.end());
 
     std::queue<OntologyInstance*> songQueue;

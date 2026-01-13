@@ -7,6 +7,7 @@
 
 #include "../Agent.h"
 #include <string>
+#include <set>
 
 class MusicPickerAgent : public Agent {
 private:
