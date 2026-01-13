@@ -3,13 +3,11 @@
 //
 
 #include "LogicController.h"
-#include "../ontology/factory/OntologyFactory.h"
 #include "../ontology/factory/RuleFactory.h"
 #include "../agent/agents/MusicAgent.h"
 #include "../agent/agents/MusicPickerAgent.h"
 #include "../agent/agents/UserAgent.h"
 #include "../agent/agents/AnalystAgent.h"
-#include "../agent/AgentMetaData.h"
 
 bool LogicController::checkFileValidity() {
     bool filesValid = true;
@@ -458,4 +456,13 @@ void LogicController::run() {
     MessageBus::send(AgentMetaData::USER_AGENT_ID, Message(AgentMetaData::SYSTEM_AGENT_ID, INFO, "start"));
     std::this_thread::sleep_for(std::chrono::seconds(1000));
     system.stop();
+}
+
+void LogicController::help() {
+    OutputDevice::writeNewLine("Below are the commands that you can use for running this application");
+    OutputDevice::writeNewLine("1. run - Calls LogicController::run, the main logic of the program that you can implement.");
+    OutputDevice::writeNewLine("2. ontology - Allows the user to create and store the schema of an Ontology.");
+    OutputDevice::writeNewLine("3. instance - Allows the user to create and store an Instance of an Ontology.");
+    OutputDevice::writeNewLine("4. rule - Allows the user to create a Decision-Based rule.");
+    OutputDevice::writeNewLine("5. file <path> - Allows the user to create multiple instances for an Ontology from a file.");
 }

@@ -28,6 +28,7 @@ public:
     static void init(const std::string& flag);
     static void init(const std::string& flag, const std::string& path);
     static void run();
+    static void help();
 };
 
 
