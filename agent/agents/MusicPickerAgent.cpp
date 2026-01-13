@@ -49,7 +49,7 @@ void MusicPickerAgent::setup(const std::string& message) {
 
     if (album == "NA") ruleDecision->removeRuleByName("album");
     else ruleDecision->getRuleByName("album")->setField("album", Value(TEXT, album));
-
+    
     if (artist == "NA") ruleDecision->removeRuleByName("artist");
     else ruleDecision->getRuleByName("artist")->setField("artist", Value(TEXT, artist));
 
@@ -110,24 +110,48 @@ void MusicPickerAgent::pickMusic(const std::string& message) {
         count++;
     }
 
-    OutputDevice::writeNewLine("Please input your preferred order using the numbers, separated by commas:");
-    std::string orderInput = InputDevice::readLineFromKeyboard();
-    std::vector<std::string> orderParts = Algorithm::split(orderInput, ',');
-    std::vector<std::string> finalQueue;
+    while (true) {
+        OutputDevice::writeNewLine("Please input your preferred order using the numbers, separated by commas:");
+        std::string orderInput = normalize(InputDevice::readLineFromKeyboard());
+        std::vector<std::string> orderParts;
+        std::vector<std::string> finalQueue;
 
-    for (const std::string& part : orderParts) {
-        int index = std::stoi(part) - 1;
-        if (index >= 0 && static_cast<size_t>(index) < topSongs.size()) {
-            finalQueue.push_back(topSongs[index]->getValue("name").getTEXT());
+        if (orderInput.empty()) {
+            for (const auto* song : topSongs) finalQueue.push_back(song->getValue("name").getTEXT());
         }
-    }
+        else {
+            orderParts = Algorithm::split(orderInput, ',');
+            bool valid = true;
+            for (const std::string& part : orderParts) {
+                try {
+                    int index = std::stoi(part) - 1;
+                    if (index < 0 || static_cast<size_t>(index) >= topSongs.size()) {
+                        valid = false;
+                        break;
+                    }
+                    finalQueue.push_back(topSongs[index]->getValue("name").getTEXT());
+                }
+                catch (...) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (!valid) {
+                OutputDevice::writeNewLine("Invalid order. Please try again.");
+                continue;
+            }
+        }
 
-    std::string finalQueueString;
-    for (size_t i = 0; i < finalQueue.size(); i++) {
-        finalQueueString += finalQueue[i];
-        if (i != finalQueue.size() - 1) finalQueueString += ",";
+        std::string finalQueueString;
+        for (size_t i = 0; i < finalQueue.size(); i++) {
+            finalQueueString += finalQueue[i];
+            if (i != finalQueue.size() - 1)
+                finalQueueString += ",";
+        }
+
+        sendInfo(finalQueueString);
+        break;
     }
-    sendInfo(finalQueueString);
 }
 
 void MusicPickerAgent::sendInfo(const std::string &message) {

@@ -6,7 +6,9 @@
 
 RuleDecision::RuleDecision(const std::vector<OntologyInstance*>& instances, const std::vector<Rule*>& rules) {
     this->instances = instances;
-    this->rules = rules;
+    for (Rule* r : rules) {
+        this->rules.push_back(r->clone());
+    }
 }
 
 void modifyScore(double& score, const double& value, Operation operation) {

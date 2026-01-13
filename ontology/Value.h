@@ -7,6 +7,7 @@
 #include "structures/Date.h"
 #include "structures/WildCard.h"
 #include "field/Type.h"
+#include "../helper/Algorithm.h"
 
 using ValueData = std::variant<
         int,

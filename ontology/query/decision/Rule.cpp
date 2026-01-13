@@ -11,6 +11,10 @@ Rule::Rule(Ontology* ontology, const std::string &ruleName, const QueryType &que
     this->operation = operation;
 }
 
+Rule *Rule::clone() const {
+    return new Rule(*this);
+}
+
 std::string Rule::getRuleName() const {
     return ruleName;
 }
@@ -106,3 +110,6 @@ void Rule::setField(const std::string &name, const Value &value) {
     }
 }
 
+std::string Rule::toString() const {
+    return "{ruleName='" + ruleName + "', query='" + ::toString(query) + "', operation='" + ::toString(operation) + "'}";
+}

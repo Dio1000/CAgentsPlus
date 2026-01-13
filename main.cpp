@@ -5,10 +5,10 @@ int main(int argc, char** argv) {
         throw std::runtime_error("Invalid number of arguments! Run using 'help' to see the commands");
     }
 
-    if (strcmp(argv[0], "run") == 0) LogicController::run();
-    else if (strcmp(argv[0], "help") == 0) LogicController::help();
-    else if (strcmp(argv[0], "ontology") == 0) LogicController::init("ontology");
-    else if (strcmp(argv[0], "instance") == 0) LogicController::init("instance");
-    else if (strcmp(argv[0], "rule") == 0) LogicController::init("rule");
-    else if (strcmp(argv[0], "file") == 0) LogicController::init("file", argv[1]);
+    if (strcmp(argv[1], "run") == 0) LogicController::run();
+    else if (strcmp(argv[1], "help") == 0) LogicController::help();
+    else if (strcmp(argv[1], "ontology") == 0) LogicController::init("ontology");
+    else if (strcmp(argv[1], "instance") == 0) LogicController::init("instance");
+    else if (strcmp(argv[1], "rule") == 0) LogicController::init("rule");
+    else if (strcmp(argv[1], "file") == 0) LogicController::init("file", argv[2]);
 }

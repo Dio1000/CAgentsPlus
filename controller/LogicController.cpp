@@ -9,6 +9,15 @@
 #include "../agent/agents/UserAgent.h"
 #include "../agent/agents/AnalystAgent.h"
 
+void LogicController::help() {
+    OutputDevice::writeNewLine("Below are the commands that you can use for running this application");
+    OutputDevice::writeNewLine("1. run - Calls LogicController::run, the main logic of the program that you can implement.");
+    OutputDevice::writeNewLine("2. ontology - Allows the user to create and store the schema of an Ontology.");
+    OutputDevice::writeNewLine("3. instance - Allows the user to create and store an Instance of an Ontology.");
+    OutputDevice::writeNewLine("4. rule - Allows the user to create a Decision-Based rule.");
+    OutputDevice::writeNewLine("5. file <path> - Allows the user to create multiple instances for an Ontology from a file.");
+}
+
 bool LogicController::checkFileValidity() {
     bool filesValid = true;
     if (!FileManager::directoryExists(MetaData::FILES_ROOT_DIRECTORY + "/ontologies")) {
@@ -229,7 +238,7 @@ void LogicController::createInstancesFromFile(const std::string& filePath) {
 
             std::string fieldName = field.getName();
             Type type = field.getType();
-            Constraint constraint = field.getConstraint();
+            Constraint constraint;
 
             try {
                 int day = -1, month = -1, year = -1;
@@ -434,7 +443,7 @@ void LogicController::run() {
     Ontology* ontology = OntologyFactory::getOntology("song");
     auto instances = OntologyFactory::getOntologyInstances(ontology);
 
-    auto rules = RuleFactory::getRules(ontology);
+    std::vector<Rule*> rules = RuleFactory::getRules(ontology);
     RuleDecision ruleDecision(instances, rules);
 
     std::unordered_map<std::string, double> weights = {{"rating", 0.5}, {"release_date", 0.25}, {"length", -0.25}};
@@ -456,13 +465,4 @@ void LogicController::run() {
     MessageBus::send(AgentMetaData::USER_AGENT_ID, Message(AgentMetaData::SYSTEM_AGENT_ID, INFO, "start"));
     std::this_thread::sleep_for(std::chrono::seconds(1000));
     system.stop();
-}
-
-void LogicController::help() {
-    OutputDevice::writeNewLine("Below are the commands that you can use for running this application");
-    OutputDevice::writeNewLine("1. run - Calls LogicController::run, the main logic of the program that you can implement.");
-    OutputDevice::writeNewLine("2. ontology - Allows the user to create and store the schema of an Ontology.");
-    OutputDevice::writeNewLine("3. instance - Allows the user to create and store an Instance of an Ontology.");
-    OutputDevice::writeNewLine("4. rule - Allows the user to create a Decision-Based rule.");
-    OutputDevice::writeNewLine("5. file <path> - Allows the user to create multiple instances for an Ontology from a file.");
 }

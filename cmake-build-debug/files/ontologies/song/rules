@@ -1,13 +1,13 @@
 rule:'artist'
 EQUAL_TO('artist':'<?>')
-ADD 30
-
-rule:'album'
-EQUAL_T0('album':'<?>')
 ADD 15
 
 rule:'genre'
 EQUAL_TO('genre':'<?>')
+ADD 10
+
+rule:'album'
+EQUAL_TO('album':'<?>')
 ADD 10
 
 rule:'language'

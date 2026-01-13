@@ -5,6 +5,31 @@
 #include "Value.h"
 #include <stdexcept>
 #include <sstream>
+#include <utility>
+
+namespace {
+    std::string normalize(std::string s) {
+        Algorithm::toLower(s);
+        s.erase(s.begin(), std::find_if(s.begin(), s.end(),
+                                        [](unsigned char ch) { return !std::isspace(ch); }));
+        s.erase(std::find_if(s.rbegin(), s.rend(),
+                             [](unsigned char ch) { return !std::isspace(ch); }).base(), s.end());
+
+        std::string out;
+        bool prevSpace = false;
+        for (char c : s) {
+            if (std::isspace(static_cast<unsigned char>(c))) {
+                if (!prevSpace) out += ' ';
+                prevSpace = true;
+            }
+            else {
+                out += c;
+                prevSpace = false;
+            }
+        }
+        return out;
+    }
+}
 
 Value::Value()
         : type(DEFAULT_TYPE), empty(true) {}
@@ -98,6 +123,7 @@ bool Value::compareTo(const Value &other) const {
     if (empty || other.empty) return false;
     if (type != other.type) return false;
 
+    if (type == TEXT) return normalize(std::get<std::string>(data)) == normalize(std::get<std::string>(other.data));
     return data == other.data;
 }
 
@@ -105,6 +131,7 @@ bool Value::greaterThan(const Value &other) const {
     if (empty || other.empty) return false;
     if (type != other.type) return false;
 
+    if (type == TEXT) return normalize(std::get<std::string>(data)) > normalize(std::get<std::string>(other.data));
     return data > other.data;
 }
 
@@ -112,6 +139,7 @@ bool Value::greaterOrEqualThan(const Value& other) const {
     if (empty || other.empty) return false;
     if (type != other.type) return false;
 
+    if (type == TEXT) return normalize(std::get<std::string>(data)) >= normalize(std::get<std::string>(other.data));
     return data >= other.data;
 }
 
@@ -119,6 +147,7 @@ bool Value::lesserThan(const Value &other) const {
     if (empty || other.empty) return false;
     if (type != other.type) return false;
 
+    if (type == TEXT) return normalize(std::get<std::string>(data)) < normalize(std::get<std::string>(other.data));
     return data < other.data;
 }
 
@@ -126,6 +155,7 @@ bool Value::lesserOrEqualThan(const Value &other) const {
     if (empty || other.empty) return false;
     if (type != other.type) return false;
 
+    if (type == TEXT) return normalize(std::get<std::string>(data)) <= normalize(std::get<std::string>(other.data));
     return data <= other.data;
 }
 
@@ -135,5 +165,5 @@ bool Value::isWildCard() const {
 
 void Value::setData(Type _type, ValueData _data) {
     this->type = _type;
-    this->data = _data;
+    this->data = std::move(_data);
 }

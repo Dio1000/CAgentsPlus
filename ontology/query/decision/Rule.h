@@ -33,6 +33,8 @@ private:
 public:
     Rule() = default;
     Rule(Ontology* ontology, const std::string& ruleName, const QueryType& query, const Operation& operation);
+    ~Rule() = default;
+    Rule* clone() const;
 
     std::string getRuleName() const;
     QueryType getQuery() const;
@@ -47,6 +49,9 @@ public:
 
     bool isEmpty() const;
     void save() const;
+    std::string toString() const;
+
+
 };
 
 

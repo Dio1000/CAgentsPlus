@@ -65,7 +65,8 @@ void MusicAgent::playMusic(const std::string& path) const {
         return;
     }
 
-    for (const std::string& song : parts) {
+    std::vector<std::string> songParts = Algorithm::split(path, ',');
+    for (const std::string& song : songParts) {
         playSong(song);
     }
 }
